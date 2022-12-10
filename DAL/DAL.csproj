@@ -83,6 +83,7 @@
     <Compile Include="Repos\MapCustomerPetRepo.cs" />
     <Compile Include="Repos\MapCustomerVetRepo.cs" />
     <Compile Include="Repos\PetRepo.cs" />
+    <Compile Include="Repos\Repo.cs" />
     <Compile Include="Repos\ReportRepo.cs" />
     <Compile Include="Repos\ShopRepo.cs" />
     <Compile Include="Repos\TokenRepo.cs" />
