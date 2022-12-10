@@ -44,6 +44,9 @@
     <Compile Include="DTOs\AccountDTO.cs" />
     <Compile Include="DTOs\AdminDTO.cs" />
     <Compile Include="DTOs\CustomerDTO.cs" />
+    <Compile Include="DTOs\CustomersFoodDTO.cs" />
+    <Compile Include="DTOs\CustomersPetDTO.cs" />
+    <Compile Include="DTOs\CustomersVetDTO.cs" />
     <Compile Include="DTOs\EmployeeDTO.cs" />
     <Compile Include="DTOs\FoodDTO.cs" />
     <Compile Include="DTOs\MapCustomerFoodDTO.cs" />
@@ -54,6 +57,7 @@
     <Compile Include="DTOs\ShopDTO.cs" />
     <Compile Include="DTOs\TokenDTO.cs" />
     <Compile Include="DTOs\VetDTO.cs" />
+    <Compile Include="DTOs\VetsCustomerDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\AdminService.cs" />
