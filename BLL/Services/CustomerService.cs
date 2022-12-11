@@ -8,5 +8,6 @@ namespace BLL.Services
 {
     internal class CustomerService
     {
+        
     }
 }
