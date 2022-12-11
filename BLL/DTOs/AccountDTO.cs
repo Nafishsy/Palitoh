@@ -8,5 +8,6 @@ namespace BLL.DTOs
 {
     internal class AccountDTO
     {
+        //Anik
     }
 }
