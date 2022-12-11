@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BLL.DTOs
 {
-    internal class CustomersFoodDTO : CustomerDTO
+    public class CustomersFoodDTO : CustomerDTO
     {
         public virtual List<MapCustomerFoodDTO> MapCustomerFoods { get; set; }
 

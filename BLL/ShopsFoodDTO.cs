@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL.DTOs
+namespace BLL
 {
-    public class ShopDTO
+    internal class ShopsFoodDTO
     {
-        public int Id { get; set; }
-        public string Location { get; set; }
     }
 }
