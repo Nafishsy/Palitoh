@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    internal class DataAccessFactory
+    public class DataAccessFactory
     {
         public static IRepo<MapCustomerVet, int, MapCustomerVet> MapCustomerVetDataAccess()
         {
