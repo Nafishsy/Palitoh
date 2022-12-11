@@ -33,5 +33,37 @@ namespace DAL
         {
             return new CustomerRepo();
         }
+        public static IRepo<Account, int, Account> AccountDataAccess()
+        {
+            return new AccountRepo();
+        }
+        public static IRepo<Admin, int, Admin> AdminDataAccess()
+        {
+            return new AdminRepo();
+        }
+        public static IRepo<Employee, int, Employee> EmployeeDataAccess()
+        {
+            return new EmployeeRepo();
+        }
+        public static IRepo<Food, int, Food> FoodDataAccess()
+        {
+            return new FoodRepo();
+        }
+        public static IRepo<Pet, int, Pet> PetDataAccess()
+        {
+            return new PetRepo();
+        }
+        public static IRepo<Report, int, Report> ReportDataAccess()
+        {
+            return new ReportRepo();
+        }
+        public static IRepo<Shop, int, Shop> ShopDataAccess()
+        {
+            return new ShopRepo();
+        }
+        public static IRepo<Token, int, Token> TokenDataAccess()
+        {
+            return new TokenRepo();
+        }
     }
 }
