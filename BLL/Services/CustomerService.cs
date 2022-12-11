@@ -10,42 +10,59 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    internal class CustomerService
+    public class CustomerService
     {
-        public static CustomerDTO Add(CustomerDTO customer)
-        {
-            var cfg = new MapperConfiguration(c => {
-                c.CreateMap<CustomerDTO, Customer>();
-                c.CreateMap<Customer, CustomerDTO>();
-            });
-            var mapper = new Mapper(cfg);
-            var cstmer = mapper.Map<Customer>(customer);
-            var data = DataAccessFactory.CustomerDataAccess().Add(cstmer);
-
-            if (data != null) return mapper.Map<CustomerDTO>(data);
-            return null;
-        }
-
-        public static List<CustomerDTO> Get()
+        public static List<CustomerDTO> GetAllCustomers()
         {
             var data = DataAccessFactory.CustomerDataAccess().Get();
-            var cfg = new MapperConfiguration(c => {
-                c.CreateMap<Customer, CustomerDTO>();
-
-            });
-            var mapper = new Mapper(cfg);
-            return mapper.Map<List<CustomerDTO>>(data);
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Customer, CustomerDTO>());
+            var mapper = new Mapper(config);
+            var DTOCustomers = mapper.Map<List<CustomerDTO>>(data);
+            return DTOCustomers;
         }
-
-        public static CustomerDTO Get(int id)
+        public static CustomerDTO GetCustomer(int id)
         {
             var data = DataAccessFactory.CustomerDataAccess().Get(id);
-            var cfg = new MapperConfiguration(c => {
-                c.CreateMap<Customer, CustomerDTO>();
-
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Customer, CustomerDTO>());
+            var mapper = new Mapper(config);
+            var DTOCustomer = mapper.Map<CustomerDTO>(data);
+            return DTOCustomer;
+        }
+        public static CustomerDTO AddCustomer(CustomerDTO obj)
+        {
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<CustomerDTO, Customer>();
+                cfg.CreateMap<Customer, CustomerDTO>();
             });
-            var mapper = new Mapper(cfg);
-            return mapper.Map<CustomerDTO>(data);
+            var mapper = new Mapper(config);
+            var EFCustomer = mapper.Map<Customer>(obj);
+            var result = DataAccessFactory.CustomerDataAccess().Add(EFCustomer);
+
+            return mapper.Map<CustomerDTO>(result);
+        }
+        public static CustomerDTO EditCustomer(CustomerDTO obj)
+        {
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<CustomerDTO, Customer>();
+                cfg.CreateMap<Customer, CustomerDTO>();
+            });
+            var mapper = new Mapper(config);
+            var EFCustomer = mapper.Map<Customer>(obj);
+            var result = DataAccessFactory.CustomerDataAccess().Update(EFCustomer);
+            var DTOCustomer = mapper.Map<CustomerDTO>(obj);
+
+            return DTOCustomer;
+        }
+        public static bool DeleteCustomer(CustomerDTO obj)
+        {
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<CustomerDTO, Customer>();
+                cfg.CreateMap<Customer, CustomerDTO>();
+            });
+            var mapper = new Mapper(config);
+            var EFCustomer = mapper.Map<Customer>(obj);
+            var result = DataAccessFactory.CustomerDataAccess().Delete(EFCustomer);
+            return result;
         }
 
         public static CustomersFoodDTO GetwithFood(int id)

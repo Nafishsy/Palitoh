@@ -10,42 +10,59 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    internal class VetService
+    public class VetService
     {
-        public static VetDTO Add(VetDTO veternarian)
-        {
-            var cfg = new MapperConfiguration(c => {
-                c.CreateMap<VetDTO, Vet>();
-                c.CreateMap<Vet, VetDTO>();
-            });
-            var mapper = new Mapper(cfg);
-            var vet = mapper.Map<Vet>(veternarian);
-            var data = DataAccessFactory.VetDataAccess().Add(vet);
-
-            if (data != null) return mapper.Map<VetDTO>(data);
-            return null;
-        }
-
-        public static List<VetDTO> Get()
+        public static List<VetDTO> GetAllVets()
         {
             var data = DataAccessFactory.VetDataAccess().Get();
-            var cfg = new MapperConfiguration(c => {
-                c.CreateMap<Vet, VetDTO>();
-
-            });
-            var mapper = new Mapper(cfg);
-            return mapper.Map<List<VetDTO>>(data);
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Vet, VetDTO>());
+            var mapper = new Mapper(config);
+            var DTOVets = mapper.Map<List<VetDTO>>(data);
+            return DTOVets;
         }
-
-        public static VetDTO Get(int id)
+        public static VetDTO GetVet(int id)
         {
             var data = DataAccessFactory.VetDataAccess().Get(id);
-            var cfg = new MapperConfiguration(c => {
-                c.CreateMap<Vet, VetDTO>();
-
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Vet, VetDTO>());
+            var mapper = new Mapper(config);
+            var DTOVet = mapper.Map<VetDTO>(data);
+            return DTOVet;
+        }
+        public static VetDTO AddVet(VetDTO obj)
+        {
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<VetDTO, Vet>();
+                cfg.CreateMap<Vet, VetDTO>();
             });
-            var mapper = new Mapper(cfg);
-            return mapper.Map<VetDTO>(data);
+            var mapper = new Mapper(config);
+            var EFVet = mapper.Map<Vet>(obj);
+            var result = DataAccessFactory.VetDataAccess().Add(EFVet);
+
+            return mapper.Map<VetDTO>(result);
+        }
+        public static VetDTO EditVet(VetDTO obj)
+        {
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<VetDTO, Vet>();
+                cfg.CreateMap<Vet, VetDTO>();
+            });
+            var mapper = new Mapper(config);
+            var EFVet = mapper.Map<Vet>(obj);
+            var result = DataAccessFactory.VetDataAccess().Update(EFVet);
+            var DTOVet = mapper.Map<VetDTO>(obj);
+
+            return DTOVet;
+        }
+        public static bool DeleteVet(VetDTO obj)
+        {
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<VetDTO, Vet>();
+                cfg.CreateMap<Vet, VetDTO>();
+            });
+            var mapper = new Mapper(config);
+            var EFVet = mapper.Map<Vet>(obj);
+            var result = DataAccessFactory.VetDataAccess().Delete(EFVet);
+            return result;
         }
         public static VetsCustomerDTO GetAllAppoinments(int id)
         {
