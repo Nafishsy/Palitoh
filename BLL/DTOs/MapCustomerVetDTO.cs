@@ -7,24 +7,11 @@ using System.Threading.Tasks;
 
 namespace BLL.DTOs
 {
-    internal class MapCustomerVetDTO
+    public class MapCustomerVetDTO
     {
         public int Id { get; set; }
-
-
-        
         public DateTime AppointmentDate { get; set; }
-
-
-
-        
         public int CustomerId { get; set; }
-        public virtual Customer Customer { get; set; }
-
-
-
-        
         public int VetId { get; set; }
-        public virtual Vet Vet { get; set; }
     }
 }

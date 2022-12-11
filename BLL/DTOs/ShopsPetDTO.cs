@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace BLL.DTOs
 {
-    public class ShopDTO
+    internal class ShopsPetDTO
     {
-        public int Id { get; set; }
-        public string Location { get; set; }
     }
 }

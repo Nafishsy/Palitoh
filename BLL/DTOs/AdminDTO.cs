@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace BLL.DTOs
 {
-    internal class AdminDTO
+    public class AdminDTO
     {
+        public int Id { get; set; }
+        public string About { get; set; }
     }
 }

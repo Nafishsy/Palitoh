@@ -42,19 +42,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTOs\AccountDTO.cs" />
+    <Compile Include="DTOs\AccountReportsDTO.cs" />
+    <Compile Include="DTOs\AccountTokensDTO.cs" />
     <Compile Include="DTOs\AdminDTO.cs" />
     <Compile Include="DTOs\CustomerDTO.cs" />
     <Compile Include="DTOs\CustomersFoodDTO.cs" />
     <Compile Include="DTOs\CustomersPetDTO.cs" />
     <Compile Include="DTOs\CustomersVetDTO.cs" />
     <Compile Include="DTOs\EmployeeDTO.cs" />
+    <Compile Include="DTOs\EmployeeFoodsDTO.cs" />
+    <Compile Include="DTOs\EmployeePetsDTO.cs" />
     <Compile Include="DTOs\FoodDTO.cs" />
+    <Compile Include="DTOs\FoodsCustomerDTO.cs" />
     <Compile Include="DTOs\MapCustomerFoodDTO.cs" />
     <Compile Include="DTOs\MapCustomerPetDTO.cs" />
     <Compile Include="DTOs\MapCustomerVetDTO.cs" />
     <Compile Include="DTOs\PetDTO.cs" />
+    <Compile Include="DTOs\PetsCustomerDTO.cs" />
     <Compile Include="DTOs\ReportDTO.cs" />
     <Compile Include="DTOs\ShopDTO.cs" />
+    <Compile Include="DTOs\ShopsEmployeeDTO.cs" />
+    <Compile Include="DTOs\ShopsFoodDTO.cs" />
+    <Compile Include="DTOs\ShopsPetDTO.cs" />
     <Compile Include="DTOs\TokenDTO.cs" />
     <Compile Include="DTOs\VetDTO.cs" />
     <Compile Include="DTOs\VetsCustomerDTO.cs" />
