@@ -28,6 +28,45 @@ namespace BLL.Services
             var DTOMapCustomerVet = mapper.Map<MapCustomerVetDTO>(data);
             return DTOMapCustomerVet;
         }
+
+        public static List<MapCustomerVetDTO> GetAppointmentsOfVet(int id) //Specific Vet's Appoinments
+        {
+            var data = GetAllMapCustomerVets();
+            var dt = data.FindAll(obj => obj.VetId == id);
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<MapCustomerVet, MapCustomerVetDTO>());
+            var mapper = new Mapper(config);
+            var DTOMapCustomerVets = mapper.Map<List<MapCustomerVetDTO>>(dt);
+            return DTOMapCustomerVets;
+        }
+        public static List<MapCustomerVetDTO> GetAppointmentsByTime(DateTime date) //Secific Date's 24 hour routine
+        {
+
+            var data = GetAllMapCustomerVets();
+            var dt = (from d in data
+                      where d.AppointmentDate <= date.Date
+                      select d).ToList();
+
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<MapCustomerVet, MapCustomerVetDTO>());
+            var mapper = new Mapper(config);
+            var DTOMapCustomerVets = mapper.Map<List<MapCustomerVetDTO>>(dt);
+            return DTOMapCustomerVets;
+
+        }
+
+        public static List<MapCustomerVetDTO> GetPastAppointmentsByTime() //Secific Date's 24 hour routine
+        {
+
+            var data = GetAllMapCustomerVets();
+            var dt = (from d in data
+                      where d.AppointmentDate != null
+                      select d).ToList();
+
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<MapCustomerVet, MapCustomerVetDTO>());
+            var mapper = new Mapper(config);
+            var DTOMapCustomerVets = mapper.Map<List<MapCustomerVetDTO>>(dt);
+            return DTOMapCustomerVets;
+
+        }
         public static MapCustomerVetDTO AddMapCustomerVet(MapCustomerVetDTO obj)
         {
             var config = new MapperConfiguration(cfg => {

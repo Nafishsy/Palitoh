@@ -10,58 +10,58 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class MapCustomerPetService
+    public class MapCustomerFoodService
     {
-        public static List<MapCustomerPetDTO> GetAllMapCustomerPets()
+        public static List<MapCustomerFoodDTO> GetAllMapCustomerFoods()
         {
-            var data = DataAccessFactory.MapCustomerPetDataAccess().Get();
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<MapCustomerPet, MapCustomerPetDTO>());
+            var data = DataAccessFactory.MapCustomerFoodDataAccess().Get();
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<MapCustomerFood, MapCustomerFoodDTO>());
             var mapper = new Mapper(config);
-            var DTOMapCustomerPets = mapper.Map<List<MapCustomerPetDTO>>(data);
-            return DTOMapCustomerPets;
+            var DTOMapCustomerFoods = mapper.Map<List<MapCustomerFoodDTO>>(data);
+            return DTOMapCustomerFoods;
         }
-        public static MapCustomerPetDTO GetMapCustomerPet(int id)
+        public static MapCustomerFoodDTO GetMapCustomerFood(int id)
         {
-            var data = DataAccessFactory.MapCustomerPetDataAccess().Get(id);
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<MapCustomerPet, MapCustomerPetDTO>());
+            var data = DataAccessFactory.MapCustomerFoodDataAccess().Get(id);
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<MapCustomerFood, MapCustomerFoodDTO>());
             var mapper = new Mapper(config);
-            var DTOMapCustomerPet = mapper.Map<MapCustomerPetDTO>(data);
-            return DTOMapCustomerPet;
+            var DTOMapCustomerFood = mapper.Map<MapCustomerFoodDTO>(data);
+            return DTOMapCustomerFood;
         }
-        public static MapCustomerPetDTO AddMapCustomerPet(MapCustomerPetDTO obj)
+        public static MapCustomerFoodDTO AddMapCustomerFood(MapCustomerFoodDTO obj)
         {
             var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<MapCustomerPetDTO, MapCustomerPet>();
-                cfg.CreateMap<MapCustomerPet, MapCustomerPetDTO>();
+                cfg.CreateMap<MapCustomerFoodDTO, MapCustomerFood>();
+                cfg.CreateMap<MapCustomerFood, MapCustomerFoodDTO>();
             });
             var mapper = new Mapper(config);
-            var EFMapCustomerPet = mapper.Map<MapCustomerPet>(obj);
-            var result = DataAccessFactory.MapCustomerPetDataAccess().Add(EFMapCustomerPet);
+            var EFMapCustomerFood = mapper.Map<MapCustomerFood>(obj);
+            var result = DataAccessFactory.MapCustomerFoodDataAccess().Add(EFMapCustomerFood);
 
-            return mapper.Map<MapCustomerPetDTO>(result);
+            return mapper.Map<MapCustomerFoodDTO>(result);
         }
-        public static MapCustomerPetDTO EditMapCustomerPet(MapCustomerPetDTO obj)
+        public static MapCustomerFoodDTO EditMapCustomerFood(MapCustomerFoodDTO obj)
         {
             var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<MapCustomerPetDTO, MapCustomerPet>();
-                cfg.CreateMap<MapCustomerPet, MapCustomerPetDTO>();
+                cfg.CreateMap<MapCustomerFoodDTO, MapCustomerFood>();
+                cfg.CreateMap<MapCustomerFood, MapCustomerFoodDTO>();
             });
             var mapper = new Mapper(config);
-            var EFMapCustomerPet = mapper.Map<MapCustomerPet>(obj);
-            var result = DataAccessFactory.MapCustomerPetDataAccess().Update(EFMapCustomerPet);
-            var DTOMapCustomerPet = mapper.Map<MapCustomerPetDTO>(obj);
+            var EFMapCustomerFood = mapper.Map<MapCustomerFood>(obj);
+            var result = DataAccessFactory.MapCustomerFoodDataAccess().Update(EFMapCustomerFood);
+            var DTOMapCustomerFood = mapper.Map<MapCustomerFoodDTO>(obj);
 
-            return DTOMapCustomerPet;
+            return DTOMapCustomerFood;
         }
-        public static bool DeleteMapCustomerPet(MapCustomerPetDTO obj)
+        public static bool DeleteMapCustomerFood(MapCustomerFoodDTO obj)
         {
             var config = new MapperConfiguration(cfg => {
-                cfg.CreateMap<MapCustomerPetDTO, MapCustomerPet>();
-                cfg.CreateMap<MapCustomerPet, MapCustomerPetDTO>();
+                cfg.CreateMap<MapCustomerFoodDTO, MapCustomerFood>();
+                cfg.CreateMap<MapCustomerFood, MapCustomerFoodDTO>();
             });
             var mapper = new Mapper(config);
-            var EFMapCustomerPet = mapper.Map<MapCustomerPet>(obj);
-            var result = DataAccessFactory.MapCustomerPetDataAccess().Delete(EFMapCustomerPet);
+            var EFMapCustomerFood = mapper.Map<MapCustomerFood>(obj);
+            var result = DataAccessFactory.MapCustomerFoodDataAccess().Delete(EFMapCustomerFood);
             return result;
         }
     }
