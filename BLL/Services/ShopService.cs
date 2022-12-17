@@ -12,7 +12,7 @@ namespace BLL.Services
 {
     public class ShopService
     {
-        public static List<ShopDTO> GetAllShops()
+        public static List<ShopDTO> GetAllShops() //shops inventory
         {
             var data = DataAccessFactory.ShopDataAccess().Get();
             var config = new MapperConfiguration(cfg => cfg.CreateMap<Shop, ShopDTO>());

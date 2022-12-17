@@ -20,6 +20,15 @@ namespace BLL.Services
             var DTOPets = mapper.Map<List<PetDTO>>(data);
             return DTOPets;
         }
+
+        public static List<PetDTO> GetAvailablePets()
+        {
+            var all = GetAllPets();
+            var available = (from d in all
+                             where d.Status == "Available"
+                             select d).ToList();
+            return available;
+        }
         public static PetDTO GetPet(int id)
         {
             var data = DataAccessFactory.PetDataAccess().Get(id);

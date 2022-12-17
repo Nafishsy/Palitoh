@@ -64,5 +64,26 @@ namespace BLL.Services
             var result = DataAccessFactory.MapCustomerPetDataAccess().Delete(EFMapCustomerPet);
             return result;
         }
+
+        public static bool Adopt(int id,int c_id,DateTime date) //adopt e tip dibe customer er id session/cookie diye c_id e boshbe
+                                                                //id hoche pet id aita list er niche adopt button er hyperlink e rakhlam
+                                                                // er por date fix korlam
+        {
+            var data = PetService.GetPet(id);
+            if (data==null && data.Status!= "Available")
+            {
+                //jodi pet table ei na thake taile back
+                return false;
+            }
+
+            var customerPet = new MapCustomerPetDTO { PetId = id , CustomerId = c_id, EmployeeId = null, AdoptionRequestTime = date};
+            
+            if (AddMapCustomerPet(customerPet) != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
