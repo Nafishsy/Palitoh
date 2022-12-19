@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Palitoh.Auth;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,5 +10,6 @@ namespace Palitoh.Controllers
 {
     public class AdminController : ApiController
     {
+        //[CustomAuth]
     }
 }

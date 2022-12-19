@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL.EF.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace DAL.Interfaces
 {
-    internal interface IAuth
+    public interface IAuth
     {
+        Token Authenticate(Account user);
+        bool isAuthenticated(string token);
+        void Logout(string token);
     }
 }
