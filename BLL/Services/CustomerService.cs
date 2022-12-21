@@ -103,6 +103,27 @@ namespace BLL.Services
             var mapper = new Mapper(cfg);
             return mapper.Map<CustomersVetDTO>(data);
         }
+        public static object SearchCutomser(string name) 
+            //object return korsi karon ami annonymous er modhe ak sathe duita data rakhsi, akt data er jonno notun DTO na banay
+            //name dile name ashbe customerDTO dile customer er object er shob properties use korte parar kotha
+        {
+            var AllAccounts = AccountService.GetAllAccounts();
+            var userName = (from dt in AllAccounts
+                            where dt.Name.ToLower().StartsWith(name.ToLower()) && dt.Type == "Customer"
+                            select dt).SingleOrDefault();
 
+            if(userName == null)
+                return null;
+            else
+            {
+                var userInfo = (from dt in GetAllCustomers()
+                                where dt.Id == userName.Id
+                                select dt).SingleOrDefault();
+
+                var obj = new { name = userName.Name, CustomerDTO = userInfo };
+                return obj;
+            }
+            
+        }
     }
 }

@@ -48,7 +48,7 @@ namespace Palitoh.Controllers
         [HttpGet]
         public HttpResponseMessage adopt(int id) //Adoption //Only Pet's status Available //Pet id , Customer iD, Time of delivery.
         {
-            var data = MapCustomerPetService.Adopt(id,1,DateTime.Now);
+            var data = MapCustomerPetService.Adopt(id, 1, DateTime.Now);
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
@@ -63,9 +63,9 @@ namespace Palitoh.Controllers
         [Route("api/palitoh/shop")]
         [HttpGet]
         public HttpResponseMessage Shop() //Inventory dekhbo
-        { 
+        {
             var data = FoodService.GetAllFoods();
-            return Request.CreateResponse(HttpStatusCode.OK,data);
+            return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
         [Route("api/palitoh/shop/cart")]
@@ -81,7 +81,7 @@ namespace Palitoh.Controllers
         //NOT IMPLEMENTED
         public HttpResponseMessage RequestItem(int id) //Request Item jeta MapCustomerFood e jabega //Request Item gular customerId 0
         {
-           // var data = MapCustomerFoodService.AddMapCustomerFood(new { });
+            // var data = MapCustomerFoodService.AddMapCustomerFood(new { });
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
@@ -98,18 +98,28 @@ namespace Palitoh.Controllers
         public HttpResponseMessage reportVetID(string name) //Vet ke report dewar jonno Id lagbe oita ani
         {
             var data = AccountService.GetAllAccounts().Find(ac => ac.Name == name && ac.Type == "Vet");
-            return Request.CreateResponse(HttpStatusCode.OK,data.Id);
+            return Request.CreateResponse(HttpStatusCode.OK, data.Id);
         }
 
         [Route("api/palitoh/report/item/{name}")]
         [HttpGet]
 
-        //Reports e ACCid ache Food Id er jonno kisu nai
+        //Reports e ACC_id ache Food Id er jonno kisu nai
         public HttpResponseMessage reportItemID(string name) //Food ke report dewar jonno Id lagbe oita ani
         {
             //Food report dewar jonno proper kisu nai
             var data = FoodService.GetAllFoods().Find(ac => ac.Name == name);
             return Request.CreateResponse(HttpStatusCode.OK, data.Id);
+        }
+
+        [Route("api/palitoh/customer/search")]
+        [HttpPost]
+
+        public HttpResponseMessage SearchCutomser(AccountDTO obj)
+        //ACC table e username diye search maira id er against e customer table ansi name soho
+        { 
+            var data = CustomerService.SearchCutomser(obj.Name);
+            return Request.CreateResponse(HttpStatusCode.OK, data);
         }
     }
 }

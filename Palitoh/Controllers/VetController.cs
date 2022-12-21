@@ -76,5 +76,15 @@ namespace Palitoh.Controllers
             var data = VetService.EditVet(vet);
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
+
+        [Route("api/palitoh/vet/search")]
+        [HttpPost]
+
+        public HttpResponseMessage SearchVet(AccountDTO obj)
+        //ACC table e username diye search maira id er against e customer table ansi name soho
+        {
+            var data = VetService.SearchVet(obj.Name);
+            return Request.CreateResponse(HttpStatusCode.OK, data);
+        }
     }
 }
