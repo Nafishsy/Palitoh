@@ -45,6 +45,10 @@ namespace DAL.EF.Models
 
 
 
+        public string Status { get; set; }
+
+
+
         public virtual List<Token> Tokens { get; set; }
         public virtual List<Report> Reports { get; set; }
         public Account()

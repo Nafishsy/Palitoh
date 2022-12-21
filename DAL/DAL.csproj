@@ -72,6 +72,10 @@
     <Compile Include="Migrations\202212091447491_AllTablesWithRelations.designer.cs">
       <DependentUpon>202212091447491_AllTablesWithRelations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202212210638283_StatusColumnAdded.cs" />
+    <Compile Include="Migrations\202212210638283_StatusColumnAdded.designer.cs">
+      <DependentUpon>202212210638283_StatusColumnAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repos\AccountRepo.cs" />
@@ -97,6 +101,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202212091447491_AllTablesWithRelations.resx">
       <DependentUpon>202212091447491_AllTablesWithRelations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212210638283_StatusColumnAdded.resx">
+      <DependentUpon>202212210638283_StatusColumnAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
