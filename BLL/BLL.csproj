@@ -65,6 +65,7 @@
     <Compile Include="DTOs\ReportDTO.cs" />
     <Compile Include="DTOs\ShopDTO.cs" />
     <Compile Include="DTOs\ShopsEmployeeDTO.cs" />
+    <Compile Include="DTOs\ShopsFoodDTO.cs" />
     <Compile Include="DTOs\ShopsPetDTO.cs" />
     <Compile Include="DTOs\TokenDTO.cs" />
     <Compile Include="DTOs\VetDTO.cs" />
@@ -84,7 +85,6 @@
     <Compile Include="Services\ShopService.cs" />
     <Compile Include="Services\TokenService.cs" />
     <Compile Include="Services\VetService.cs" />
-    <Compile Include="ShopsFoodDTO.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

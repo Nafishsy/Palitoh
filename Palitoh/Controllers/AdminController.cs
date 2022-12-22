@@ -246,5 +246,35 @@ namespace Palitoh.Controllers
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
         }
+
+
+
+        //Nevigation values
+        [Route("api/Accounts/{id}/Reports")]
+        [HttpGet]
+        public HttpResponseMessage AccountWithReports(int id)
+        {
+            try
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, AccountService.AccountWithReports(id));
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+        [Route("api/Accounts/{id}/Tokens")]
+        [HttpGet]
+        public HttpResponseMessage AccountWithTokens(int id)
+        {
+            try
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, AccountService.AccountWithTokens(id));
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
     }
 }

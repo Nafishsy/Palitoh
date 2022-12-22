@@ -64,5 +64,35 @@ namespace BLL.Services
             var result = DataAccessFactory.ShopDataAccess().Delete(EFShop);
             return result;
         }
+        public static ShopsPetDTO ShopWithPets(int id)
+        {
+            var data = DataAccessFactory.ShopDataAccess().Get(id);
+            var cfg = new MapperConfiguration(c => {
+                c.CreateMap<Shop, ShopsPetDTO>();
+                c.CreateMap<Pet, PetDTO>();
+            });
+            var mapper = new Mapper(cfg);
+            return mapper.Map<ShopsPetDTO>(data);
+        }
+        public static ShopsFoodDTO ShopWithFoods(int id)
+        {
+            var data = DataAccessFactory.ShopDataAccess().Get(id);
+            var cfg = new MapperConfiguration(c => {
+                c.CreateMap<Shop, ShopsFoodDTO>();
+                c.CreateMap<Food, FoodDTO>();
+            });
+            var mapper = new Mapper(cfg);
+            return mapper.Map<ShopsFoodDTO>(data);
+        }
+        public static ShopsEmployeeDTO ShopWithEmployees(int id)
+        {
+            var data = DataAccessFactory.ShopDataAccess().Get(id);
+            var cfg = new MapperConfiguration(c => {
+                c.CreateMap<Shop, ShopsEmployeeDTO>();
+                c.CreateMap<Employee, EmployeeDTO>();
+            });
+            var mapper = new Mapper(cfg);
+            return mapper.Map<ShopsEmployeeDTO>(data);
+        }
     }
 }

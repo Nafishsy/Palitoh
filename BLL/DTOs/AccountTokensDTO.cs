@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace BLL.DTOs
 {
-    public class AccountTokensDTO
+    public class AccountTokensDTO : AccountDTO
     {
+        public virtual List<TokenDTO> Tokens { get; set; }
+        public AccountTokensDTO()
+        {
+            Tokens = new List<TokenDTO>();
+        }
     }
 }

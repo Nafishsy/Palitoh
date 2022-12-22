@@ -185,5 +185,48 @@ namespace Palitoh.Controllers
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
         }
+
+
+
+        //Nevigation values
+        [Route("api/Shop/{id}/Employees")]
+        [HttpGet]
+        public HttpResponseMessage ShopWithEmployees(int id)
+        {
+            try
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, ShopService.ShopWithEmployees(id));
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+        [Route("api/Shop/{id}/Pets")]
+        [HttpGet]
+        public HttpResponseMessage ShopWithPets(int id)
+        {
+            try
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, ShopService.ShopWithPets(id));
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+        [Route("api/Shop/{id}/Foods")]
+        [HttpGet]
+        public HttpResponseMessage ShopWithFoods(int id)
+        {
+            try
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, ShopService.ShopWithFoods(id));
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
     }
 }

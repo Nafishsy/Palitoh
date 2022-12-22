@@ -65,5 +65,25 @@ namespace BLL.Services
             var result = DataAccessFactory.AccountDataAccess().Delete(EFAccount);
             return result;
         }
+        public static AccountReportsDTO AccountWithReports(int id)
+        {
+            var data = DataAccessFactory.AccountDataAccess().Get(id);
+            var cfg = new MapperConfiguration(c => {
+                c.CreateMap<Account, AccountReportsDTO>();
+                c.CreateMap<Report, ReportDTO>();
+            });
+            var mapper = new Mapper(cfg);
+            return mapper.Map<AccountReportsDTO>(data);
+        }
+        public static AccountTokensDTO AccountWithTokens(int id)
+        {
+            var data = DataAccessFactory.AccountDataAccess().Get(id);
+            var cfg = new MapperConfiguration(c => {
+                c.CreateMap<Account, AccountTokensDTO>();
+                c.CreateMap<Token, TokenDTO>();
+            });
+            var mapper = new Mapper(cfg);
+            return mapper.Map<AccountTokensDTO>(data);
+        }
     }
 }
