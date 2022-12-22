@@ -20,6 +20,17 @@ namespace BLL.Services
             var DTOVets = mapper.Map<List<VetDTO>>(data);
             return DTOVets;
         }
+
+        public static object GetAllVetsInfo()
+        {
+            var data = GetAllVets();
+            var accounts = AccountService.GetAllAccounts();
+            var List = (from dt in data
+                        join ac in accounts on dt.Id equals ac.Id
+                        orderby ac.Name
+                        select new { ac.Name,dt.Id,dt.Location,dt.Designation,dt.AppointmentFees}).ToList();
+            return List;
+        }
         public static VetDTO GetVet(int id)
         {
             var data = DataAccessFactory.VetDataAccess().Get(id);

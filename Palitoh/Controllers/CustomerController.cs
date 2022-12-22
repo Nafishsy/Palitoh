@@ -6,17 +6,19 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Palitoh.Controllers
 {
+    [EnableCors("*", "*", "*")]
     public class CustomerController : ApiController
     {
 
-        [Route("api/vet/all")]
+        [Route("api/vets/all")]
         [HttpGet]
         public HttpResponseMessage VetList() //Customer Can see All Vets
         {
-            var data = VetService.GetAllVets();
+            var data = VetService.GetAllVetsInfo();
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
