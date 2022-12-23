@@ -54,6 +54,34 @@ namespace BLL.Services
 
             return DTOAccount;
         }
+        public static AccountDTO BanAccount(AccountDTO obj)
+        {
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<AccountDTO, Account>();
+                cfg.CreateMap<Account, AccountDTO>();
+            });
+            var mapper = new Mapper(config);
+            obj.Status = "Banned";
+            var EFAccount = mapper.Map<Account>(obj);
+            var result = DataAccessFactory.AccountDataAccess().Update(EFAccount);
+            var DTOAccount = mapper.Map<AccountDTO>(obj);
+
+            return DTOAccount;
+        }
+        public static AccountDTO ActivateAccount(AccountDTO obj)
+        {
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<AccountDTO, Account>();
+                cfg.CreateMap<Account, AccountDTO>();
+            });
+            var mapper = new Mapper(config);
+            obj.Status = "Active";
+            var EFAccount = mapper.Map<Account>(obj);
+            var result = DataAccessFactory.AccountDataAccess().Update(EFAccount);
+            var DTOAccount = mapper.Map<AccountDTO>(obj);
+
+            return DTOAccount;
+        }
         public static bool DeleteAccount(AccountDTO obj)
         {
             var config = new MapperConfiguration(cfg => {

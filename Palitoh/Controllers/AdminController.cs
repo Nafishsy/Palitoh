@@ -14,15 +14,15 @@ namespace Palitoh.Controllers
     {
         //[CustomAuth]
         //Account Table
-        [Route("api/Accounts")]
+        [Route("api/Accounts")] //All accounts list show
         [HttpGet]
-        public HttpResponseMessage GetAllAccounts()
+        public HttpResponseMessage GetAllAccounts() 
         {
             var data = AccountService.GetAllAccounts();
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
-        [Route("api/Account/{id}")]
+        [Route("api/Account/{id}")] // Single user info show
         [HttpGet]
         public HttpResponseMessage GetAccount(int id)
         {
@@ -30,7 +30,7 @@ namespace Palitoh.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
-        [Route("api/Account/delete")]
+        [Route("api/Account/delete")] //Permanently ban user
         [HttpPost]
         public HttpResponseMessage DeleteAccount(AccountDTO obj)
         {
@@ -38,7 +38,39 @@ namespace Palitoh.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
-        [Route("api/Account/add")]
+        [Route("api/Account/temporaryBan")] //Temporarily ban user
+        [HttpPost]
+        public HttpResponseMessage BanAccount(AccountDTO obj)
+        {
+            if (ModelState.IsValid)
+            {
+                var res = AccountService.BanAccount(obj);
+                if (res != null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, new { Msg = "Banned", data = res });
+                }
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+        }
+
+        [Route("api/Account/Acrivate")] //Activate user
+        [HttpPost]
+        public HttpResponseMessage ActivateAccount(AccountDTO obj)
+        {
+            if (ModelState.IsValid)
+            {
+                var res = AccountService.ActivateAccount(obj);
+                if (res != null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, new { Msg = "Activated", data = res });
+                }
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+        }
+
+        [Route("api/Account/add")] //Registration
         [HttpPost]
         public HttpResponseMessage AddAccount(AccountDTO obj)
         {
@@ -54,7 +86,7 @@ namespace Palitoh.Controllers
             return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
         }
 
-        [Route("api/Account/edit")]
+        [Route("api/Account/edit")] //Edit user info
         [HttpPost]
         public HttpResponseMessage EditAccount(AccountDTO obj)
         {
@@ -73,7 +105,7 @@ namespace Palitoh.Controllers
 
 
         //Admin Table
-        [Route("api/Admins")]
+        [Route("api/Admins")] //Admin info show
         [HttpGet]
         public HttpResponseMessage GetAllAdmins()
         {
@@ -81,7 +113,7 @@ namespace Palitoh.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
-        [Route("api/Admin/{id}")]
+        [Route("api/Admin/{id}")] //Single admin info show
         [HttpGet]
         public HttpResponseMessage GetAdmin(int id)
         {
@@ -89,7 +121,7 @@ namespace Palitoh.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
-        [Route("api/Admin/delete")]
+        [Route("api/Admin/delete")] //Delete admin
         [HttpPost]
         public HttpResponseMessage DeleteAdmin(AdminDTO obj)
         {
@@ -97,7 +129,7 @@ namespace Palitoh.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
-        [Route("api/Admin/add")]
+        [Route("api/Admin/add")] //Add new admin
         [HttpPost]
         public HttpResponseMessage AddAdmin(AdminDTO obj)
         {
@@ -113,7 +145,7 @@ namespace Palitoh.Controllers
             return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
         }
 
-        [Route("api/Admin/edit")]
+        [Route("api/Admin/edit")] //Edit admin info
         [HttpPost]
         public HttpResponseMessage EditAdmin(AdminDTO obj)
         {
@@ -191,7 +223,7 @@ namespace Palitoh.Controllers
 
 
         //Report Table
-        [Route("api/Reports")]
+        [Route("api/Reports")] //All reports get
         [HttpGet]
         public HttpResponseMessage GetAllReports()
         {
@@ -199,7 +231,7 @@ namespace Palitoh.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
-        [Route("api/Report/{id}")]
+        [Route("api/Report/{id}")] //Single report get
         [HttpGet]
         public HttpResponseMessage GetReport(int id)
         {
@@ -207,7 +239,7 @@ namespace Palitoh.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
-        [Route("api/Report/delete")]
+        [Route("api/Report/delete")] //Delete report
         [HttpPost]
         public HttpResponseMessage DeleteReport(ReportDTO obj)
         {
@@ -215,7 +247,7 @@ namespace Palitoh.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
-        [Route("api/Report/add")]
+        [Route("api/Report/add")] //Add new report
         [HttpPost]
         public HttpResponseMessage AddReport(ReportDTO obj)
         {
@@ -231,7 +263,7 @@ namespace Palitoh.Controllers
             return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
         }
 
-        [Route("api/Report/edit")]
+        [Route("api/Report/edit")] //Edit report
         [HttpPost]
         public HttpResponseMessage EditReport(ReportDTO obj)
         {
@@ -250,7 +282,7 @@ namespace Palitoh.Controllers
 
 
         //Nevigation values
-        [Route("api/Accounts/{id}/Reports")]
+        [Route("api/Accounts/{id}/Reports")] //Account with reports
         [HttpGet]
         public HttpResponseMessage AccountWithReports(int id)
         {
@@ -263,13 +295,56 @@ namespace Palitoh.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
             }
         }
-        [Route("api/Accounts/{id}/Tokens")]
+
+        [Route("api/Accounts/{id}/Tokens")] //Account with tokens
         [HttpGet]
         public HttpResponseMessage AccountWithTokens(int id)
         {
             try
             {
                 return Request.CreateResponse(HttpStatusCode.OK, AccountService.AccountWithTokens(id));
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        [Route("api/Shop/{id}/Employees")] //Shop with employees
+        [HttpGet]
+        public HttpResponseMessage ShopWithEmployees(int id)
+        {
+            try
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, ShopService.ShopWithEmployees(id));
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        [Route("api/Shop/{id}/Pets")] //Shop with pets
+        [HttpGet]
+        public HttpResponseMessage ShopWithPets(int id)
+        {
+            try
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, ShopService.ShopWithPets(id));
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        [Route("api/Shop/{id}/Foods")] //Shop with foods
+        [HttpGet]
+        public HttpResponseMessage ShopWithFoods(int id)
+        {
+            try
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, ShopService.ShopWithFoods(id));
             }
             catch (Exception ex)
             {
