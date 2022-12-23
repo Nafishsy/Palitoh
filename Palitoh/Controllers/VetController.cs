@@ -10,7 +10,7 @@ using System.Web.Http.Cors;
 
 namespace Palitoh.Controllers
 {
-    
+    [EnableCors("*", "*", "*")]
     public class VetController : ApiController
     {
         [Route("api/vet/appointments/{id}")]
@@ -18,6 +18,14 @@ namespace Palitoh.Controllers
         public HttpResponseMessage Appoinments(int id) //can see his schedule
         {
             var data = MapCustomerVetService.GetAppointmentsOfVet(id);
+            return Request.CreateResponse(HttpStatusCode.OK, data);
+        }
+
+        [Route("api/vet/appointments/search/name")]
+        [HttpPost]
+        public HttpResponseMessage SearchPaitent(AccountDTO obj) //can see his schedule
+        {
+            var data = MapCustomerVetService.SearchVetsPatient(obj.Name,obj.Id);
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
@@ -42,7 +50,7 @@ namespace Palitoh.Controllers
         [HttpPost]
         public HttpResponseMessage SearchByDate(MapCustomerVetDTO obj) //CreateAppoinment
         {
-            var data = MapCustomerVetService.GetAppointmentsByTime(obj.AppointmentDate,obj.CustomerId);
+            var data = MapCustomerVetService.GetAppointmentsHistoryUser(obj.AppointmentDate,obj.CustomerId);
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
@@ -86,6 +94,14 @@ namespace Palitoh.Controllers
         //ACC table e username diye search maira id er against e customer table ansi name soho
         {
             var data = VetService.SearchVet(obj.Name);
+            return Request.CreateResponse(HttpStatusCode.OK, data);
+        }
+
+        [Route("api/vets/appoinments")]
+        [HttpGet]
+        public HttpResponseMessage UserList() //Customer Can see All Vets
+        {
+            var data = VetService.GetAllVetsInfo();
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
     }

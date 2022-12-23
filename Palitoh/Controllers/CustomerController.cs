@@ -49,7 +49,7 @@ namespace Palitoh.Controllers
         [HttpGet]
         public HttpResponseMessage History(int id) //Past consultation
         {
-            var data = MapCustomerVetService.GetAppointmentsByTime(System.DateTime.Now,id);
+            var data = MapCustomerVetService.GetAppointmentsHistoryUser(System.DateTime.Now,id);
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
