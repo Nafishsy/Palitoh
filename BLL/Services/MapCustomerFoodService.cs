@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace BLL.Services
 {
@@ -62,6 +63,26 @@ namespace BLL.Services
             var mapper = new Mapper(config);
             var EFMapCustomerFood = mapper.Map<MapCustomerFood>(obj);
             var result = DataAccessFactory.MapCustomerFoodDataAccess().Delete(EFMapCustomerFood);
+            return result;
+        }
+
+        public static bool addOrder(List<int> ids)
+        {
+            bool result = true;
+            foreach (var id in ids)
+            {
+                MapCustomerFoodDTO order = new MapCustomerFoodDTO();
+                order.OrderId = 2;
+                order.EmployeeId = null;
+                order.CustomerId = 1;
+                order.FoodId = id;
+                order.RequestItemTime = System.DateTime.Now.AddDays(2);
+
+                if(AddMapCustomerFood(order)==null)
+                {
+                    result = false;
+                }
+            }
             return result;
         }
     }

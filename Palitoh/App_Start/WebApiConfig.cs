@@ -20,6 +20,7 @@ namespace Palitoh
                 defaults: new { id = RouteParameter.Optional }
             );
             config.EnableCors();
+
             
         }
     }

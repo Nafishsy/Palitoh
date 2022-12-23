@@ -7,12 +7,19 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.ModelBinding;
+using System.Web.Script.Serialization;
+using System.Web.Services;
+using System.Web.SessionState;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Palitoh.Controllers
 {
     [EnableCors("*", "*", "*")]
+    
     public class CustomerController : ApiController
     {
+        public System.Web.SessionState.HttpSessionState Session { get; set; }
 
         [Route("api/vets/all")]
         [HttpGet]
@@ -20,6 +27,14 @@ namespace Palitoh.Controllers
         {
             var data = VetService.GetAllVetsInfo();
             return Request.CreateResponse(HttpStatusCode.OK, data);
+        }
+
+        [Route("api/customer/appointment/request/vet")]
+        [HttpPost]
+        public HttpResponseMessage AppointmentReq(MapCustomerVetDTO obj) //Customer can consult
+        {
+            var data = MapCustomerVetService.SetAppointment(obj);
+            return Request.CreateResponse(HttpStatusCode.OK,data);
         }
 
         [Route("api/customer/appointment/consult")]
@@ -30,11 +45,11 @@ namespace Palitoh.Controllers
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
-        [Route("api/customer/appointment/history")]
+        [Route("api/customer/appointment/history/{id}")]
         [HttpGet]
-        public HttpResponseMessage History() //Past consultation
+        public HttpResponseMessage History(int id) //Past consultation
         {
-            var data = MapCustomerVetService.GetAppointmentsByTime(System.DateTime.Now);
+            var data = MapCustomerVetService.GetAppointmentsHistoryUser(System.DateTime.Now,id);
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
@@ -72,10 +87,10 @@ namespace Palitoh.Controllers
 
         [Route("api/palitoh/shop/cart")]
         [HttpPost]
-        public HttpResponseMessage addtocart(MapCustomerFoodDTO obj) //react er store kore rakhte hobe cart 
+        public HttpResponseMessage addtocart(List<int> ids) //react er store kore rakhte hobe cart 
         {
-            var data = MapCustomerFoodService.AddMapCustomerFood(obj);
-            return Request.CreateResponse(HttpStatusCode.OK);
+            var data = MapCustomerFoodService.addOrder(ids);
+            return Request.CreateResponse(HttpStatusCode.OK,data);
         }
 
         [Route("api/palitoh/shop/{id}/request")]
@@ -87,13 +102,6 @@ namespace Palitoh.Controllers
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
-        [Route("api/palitoh/report/vet/{id}/done")]
-        [HttpPost]
-        public HttpResponseMessage report(ReportDTO obj) //Vet ke report dewar jonno
-        {
-            var data = ReportService.AddReport(obj);
-            return Request.CreateResponse(HttpStatusCode.OK);
-        }
 
         [Route("api/palitoh/report/vet/{name}")]
         [HttpGet]
@@ -121,6 +129,26 @@ namespace Palitoh.Controllers
         //ACC table e username diye search maira id er against e customer table ansi name soho
         { 
             var data = CustomerService.SearchCutomser(obj.Name);
+            return Request.CreateResponse(HttpStatusCode.OK, data);
+        }
+
+        [Route("api/palitoh/pets/")]
+        [HttpGet]
+
+        public HttpResponseMessage AllPets()
+        //ACC table e username diye search maira id er against e customer table ansi name soho
+        {
+            var data = PetService.GetAvailablePets();
+            return Request.CreateResponse(HttpStatusCode.OK, data);
+        }
+
+        [Route("api/palitoh/vets/report/")]
+        [HttpPost]
+
+        public HttpResponseMessage AddReport(ReportDTO rt)
+        //ACC table e username diye search maira id er against e customer table ansi name soho
+        {
+            var data = ReportService.AddReport(rt);
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
     }
