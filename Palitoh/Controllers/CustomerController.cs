@@ -29,6 +29,14 @@ namespace Palitoh.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
+        [Route("api/customer/appointment/request/vet")]
+        [HttpPost]
+        public HttpResponseMessage AppointmentReq(MapCustomerVetDTO obj) //Customer can consult
+        {
+            var data = MapCustomerVetService.SetAppointment(obj);
+            return Request.CreateResponse(HttpStatusCode.OK,data);
+        }
+
         [Route("api/customer/appointment/consult")]
         [HttpGet]
         public HttpResponseMessage Consult() //Customer can consult
@@ -37,11 +45,11 @@ namespace Palitoh.Controllers
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
-        [Route("api/customer/appointment/history")]
+        [Route("api/customer/appointment/history/{id}")]
         [HttpGet]
-        public HttpResponseMessage History() //Past consultation
+        public HttpResponseMessage History(int id) //Past consultation
         {
-            var data = MapCustomerVetService.GetAppointmentsByTime(System.DateTime.Now);
+            var data = MapCustomerVetService.GetAppointmentsByTime(System.DateTime.Now,id);
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
@@ -94,13 +102,6 @@ namespace Palitoh.Controllers
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
-        [Route("api/palitoh/report/vet/{id}/done")]
-        [HttpPost]
-        public HttpResponseMessage report(ReportDTO obj) //Vet ke report dewar jonno
-        {
-            var data = ReportService.AddReport(obj);
-            return Request.CreateResponse(HttpStatusCode.OK,data);
-        }
 
         [Route("api/palitoh/report/vet/{name}")]
         [HttpGet]
@@ -128,6 +129,26 @@ namespace Palitoh.Controllers
         //ACC table e username diye search maira id er against e customer table ansi name soho
         { 
             var data = CustomerService.SearchCutomser(obj.Name);
+            return Request.CreateResponse(HttpStatusCode.OK, data);
+        }
+
+        [Route("api/palitoh/pets/")]
+        [HttpGet]
+
+        public HttpResponseMessage AllPets()
+        //ACC table e username diye search maira id er against e customer table ansi name soho
+        {
+            var data = PetService.GetAvailablePets();
+            return Request.CreateResponse(HttpStatusCode.OK, data);
+        }
+
+        [Route("api/palitoh/vets/report/")]
+        [HttpPost]
+
+        public HttpResponseMessage AddReport(ReportDTO rt)
+        //ACC table e username diye search maira id er against e customer table ansi name soho
+        {
+            var data = ReportService.AddReport(rt);
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
     }

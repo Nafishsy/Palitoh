@@ -70,18 +70,22 @@ namespace BLL.Services
                                                                 // er por date fix korlam
         {
             var data = PetService.GetPet(id);
-            if (data==null && data.Status!= "Available")
+            if ( data==null || data.Status!= "Available")
             {
                 //jodi pet table ei na thake taile back
                 return false;
             }
-
-            var customerPet = new MapCustomerPetDTO { PetId = id , CustomerId = c_id, EmployeeId = null, AdoptionRequestTime = date};
-            
-            if (AddMapCustomerPet(customerPet) != null)
+            else
             {
-                return true;
+                var customerPet = new MapCustomerPetDTO { PetId = id, CustomerId = c_id, EmployeeId = null, AdoptionRequestTime = date };
+
+                if (AddMapCustomerPet(customerPet) != null)
+                {
+                    return true;
+                }
+
             }
+            
 
             return false;
         }

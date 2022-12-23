@@ -42,7 +42,7 @@ namespace Palitoh.Controllers
         [HttpPost]
         public HttpResponseMessage SearchByDate(MapCustomerVetDTO obj) //CreateAppoinment
         {
-            var data = MapCustomerVetService.GetAppointmentsByTime(obj.AppointmentDate);
+            var data = MapCustomerVetService.GetAppointmentsByTime(obj.AppointmentDate,obj.CustomerId);
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
