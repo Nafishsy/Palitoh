@@ -59,7 +59,7 @@
                 "dbo.Customers",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: false),
+                        Id = c.Int(nullable: false, identity: true),
                         Location = c.String(nullable: false),
                         Balance = c.Single(nullable: false),
                     })
@@ -137,7 +137,7 @@
                 "dbo.Shops",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: false),
+                        Id = c.Int(nullable: false, identity: true),
                         Location = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
@@ -176,7 +176,7 @@
                 "dbo.Vets",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: false),
+                        Id = c.Int(nullable: false, identity: true),
                         Designation = c.String(nullable: false),
                         Location = c.String(nullable: false),
                         AppointmentFees = c.Single(nullable: false),

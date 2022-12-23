@@ -21,11 +21,19 @@ namespace Palitoh.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
-        [Route("api/vet/appointments/search/name")]
+        [Route("api/vet/appointments/search/date")]
         [HttpPost]
         public HttpResponseMessage SearchPaitent(SearchFormDTO obj) //can see his schedule
         {
             var data = MapCustomerVetService.SearchVetsPatientByDTD(obj);
+            return Request.CreateResponse(HttpStatusCode.OK, data);
+        }
+
+        [Route("api/vet/appointments/search/name")]
+        [HttpPost]
+        public HttpResponseMessage SearchPaitent(AccountDTO obj) //can see his schedule
+        {
+            var data = MapCustomerVetService.SearchVetsPatient(obj.Name, obj.Id);
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 

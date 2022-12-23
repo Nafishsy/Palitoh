@@ -151,5 +151,16 @@ namespace Palitoh.Controllers
             var data = ReportService.AddReport(rt);
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
+
+        [Route("api/addkori")]
+        [HttpPost]
+        //Testing api
+        public HttpResponseMessage Add(VetDTO ct)
+        //ACC table e username diye search maira id er against e customer table ansi name soho
+        {
+            var data = VetService.AddVet(ct);
+            return Request.CreateResponse(HttpStatusCode.OK, data);
+
+        }
     }
 }

@@ -7,9 +7,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
+using System.Web.UI;
 
 namespace Palitoh.Controllers
 {
+
+    [EnableCors("*", "*", "*")]
     public class AdminController : ApiController
     {
         //[CustomAuth]
@@ -74,16 +78,42 @@ namespace Palitoh.Controllers
         [HttpPost]
         public HttpResponseMessage AddAccount(AccountDTO obj)
         {
-            if (ModelState.IsValid)
+            
+            if (obj.Type == "Customer")
             {
                 var res = AccountService.AddAccount(obj);
-                if (res != null)
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, new { Msg = "Added", data = res });
-                }
-                return Request.CreateResponse(HttpStatusCode.InternalServerError);
+                CustomerDTO cst= new CustomerDTO();
+                cst.Id=res.Id;
+                cst.Location = "empty";
+                cst.Balance = 5000;
+                var customer = CustomerService.AddCustomer(cst);
+                return Request.CreateResponse(HttpStatusCode.OK, customer);
             }
-            return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+            else if(obj.Type == "Vet")
+            {
+                var res = AccountService.AddAccount(obj);
+                VetDTO vt = new VetDTO();
+                vt.Id = res.Id;
+                vt.Designation = "empty";
+                vt.AppointmentFees = 1000;
+                vt.Location = "empty";
+                var vet = VetService.AddVet(vt);
+                return Request.CreateResponse(HttpStatusCode.OK, vet);
+            }
+            else if (obj.Type == "Shop")
+            {
+                var res = AccountService.AddAccount(obj);
+                ShopDTO sh = new ShopDTO();
+                sh.Id = res.Id;
+                sh.Location = "empty";
+
+                var shop = ShopService.AddShop(sh);
+                return Request.CreateResponse(HttpStatusCode.OK, shop);
+            }
+            
+            return Request.CreateResponse(HttpStatusCode.BadRequest, new { Msg = ModelState.Values.SelectMany(v => v.Errors)});      
+
+            
         }
 
         [Route("api/Account/edit")] //Edit user info
