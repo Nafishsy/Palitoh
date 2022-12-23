@@ -6,9 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Palitoh.Controllers
 {
+    [EnableCors("*","*","*")]
     public class AuthController : ApiController
     {
         [Route("api/login")]
@@ -18,7 +20,8 @@ namespace Palitoh.Controllers
             var token = AuthService.Authenticate(user);
             if(token != null)
             {
-                return Request.CreateResponse(HttpStatusCode.OK,token);
+                var acc = AccountService.GetAccount(token.AccountId);
+                return Request.CreateResponse(HttpStatusCode.OK, new { Token = token, user = acc });
             }
             return Request.CreateResponse(HttpStatusCode.NotFound,"User not found");
         }

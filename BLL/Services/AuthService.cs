@@ -18,6 +18,7 @@ namespace BLL.Services
                 cfg.CreateMap<AccountDTO, Account>();
                 cfg.CreateMap<Account, AccountDTO>();
             });
+
             var mapper = new Mapper(config);
             var data = mapper.Map<Account>(user);
 
