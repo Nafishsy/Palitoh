@@ -48,6 +48,16 @@ namespace BLL.Services
                         select new { ac.Name, dt.AppointmentDate, ac.Id }).ToList();
             return data;
         }
+
+        public static object SearchVetsPatientByDTD(SearchFormDTO srch) //Specific Vet's Appoinments er upor User name diya Date time to Date time
+        {
+            var data = (from dt in GetAllMapCustomerVets()
+                        join ac in AccountService.GetAllAccounts() on dt.VetId equals ac.Id
+                        orderby ac.Name
+                        where dt.VetId == srch.Id && dt.AppointmentDate.Date >= srch.StartDate && (dt.AppointmentDate.Date <= srch.EndDate || srch.EndDate==null)
+                        select new { ac.Name, dt.AppointmentDate, ac.Id }).ToList();
+            return data;
+        }
         public static object GetAppointmentsHistoryUser(DateTime date,int id) //Secific Date's er ager appointments for USER
         {
 

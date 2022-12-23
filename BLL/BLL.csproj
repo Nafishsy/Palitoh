@@ -63,6 +63,7 @@
     <Compile Include="DTOs\PetDTO.cs" />
     <Compile Include="DTOs\PetsCustomerDTO.cs" />
     <Compile Include="DTOs\ReportDTO.cs" />
+    <Compile Include="DTOs\SearchFormDTO.cs" />
     <Compile Include="DTOs\ShopDTO.cs" />
     <Compile Include="DTOs\ShopsEmployeeDTO.cs" />
     <Compile Include="DTOs\ShopsFoodDTO.cs" />
