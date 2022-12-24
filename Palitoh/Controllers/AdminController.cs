@@ -282,13 +282,29 @@ namespace Palitoh.Controllers
 
 
         //Report Table
-        [Route("api/Reports")] //All reports get
+        [Route("api/Reports")] //All reports 
+        [HttpGet]
+        public HttpResponseMessage GetAllReports()
+        {
+            var data = ReportService.AllReports();
+            return Request.CreateResponse(HttpStatusCode.OK, data);
+        }
+
+        [Route("api/admin/reports/search/")] //All reports 
+        [HttpPost]
+        public HttpResponseMessage SearchReports(AccountDTO obj)
+        {
+            var data = ReportService.SearchReports(obj.Name);
+            return Request.CreateResponse(HttpStatusCode.OK, data);
+        }
+
+        /*[Route("api/Reports")] //All reports get
         [HttpGet]
         public HttpResponseMessage GetAllReports()
         {
             var data = ReportService.GetAllReports();
             return Request.CreateResponse(HttpStatusCode.OK, data);
-        }
+        }*/
 
         [Route("api/Report/{id}")] //Single report get
         [HttpGet]
@@ -410,5 +426,7 @@ namespace Palitoh.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
             }
         }
+
+      
     }
 }

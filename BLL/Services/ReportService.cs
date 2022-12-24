@@ -64,5 +64,25 @@ namespace BLL.Services
             var result = DataAccessFactory.ReportDataAccess().Delete(EFReport);
             return result;
         }
+
+        public static object AllReports()
+        {
+            var data = GetAllReports();
+            var dt = (from d in data
+                      join ac in AccountService.GetAllAccounts() on d.Id equals ac.Id
+                      select new { ac.Name, d }).ToList();
+            return dt;
+        }
+
+        public static object SearchReports(string name)
+        {
+            var data = GetAllReports();
+            var dt = (from d in data
+                      join ac in AccountService.GetAllAccounts() on d.Id equals ac.Id
+                      where ac.Name.ToLower().StartsWith(name.ToLower())
+                      select new { ac.Name, d }).ToList();
+            return dt;
+
+        }
     }
 }
