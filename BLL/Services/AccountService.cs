@@ -130,5 +130,20 @@ namespace BLL.Services
             var mapper = new Mapper(cfg);
             return mapper.Map<AccountTokensDTO>(data);
         }
+
+        public static bool UpdateAccount(AccountDTO obj)
+        {
+            var data = GetAccount(obj.Id);
+
+            data.Name = obj.Name;
+            data.UserName = obj.UserName;
+            data.Type = obj.Type;
+
+            if(EditAccount(data)!=null)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

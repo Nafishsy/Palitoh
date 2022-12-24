@@ -136,6 +136,19 @@ namespace Palitoh.Controllers
         [HttpPost]
         public HttpResponseMessage EditAccount(AccountDTO obj)
         {
+            var res = AccountService.UpdateAccount(obj);
+            if (res != null)
+            {
+                    return Request.CreateResponse(HttpStatusCode.OK, res);
+            }
+            return Request.CreateResponse(HttpStatusCode.InternalServerError);
+            
+        }
+
+       /* [Route("api/Account/edit")] //Edit user info
+        [HttpPost]
+        public HttpResponseMessage EditAccount(AccountDTO obj)
+        {
             if (ModelState.IsValid)
             {
                 var res = AccountService.EditAccount(obj);
@@ -147,7 +160,7 @@ namespace Palitoh.Controllers
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
         }
-
+        */
 
 
         //Admin Table
