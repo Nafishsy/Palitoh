@@ -103,6 +103,13 @@ namespace BLL.Services
             var result = DataAccessFactory.AccountDataAccess().Delete(EFAccount);
             return result;
         }
+
+        public static bool DeleteUser(int id)
+        {
+            var acc = GetAccount(id);
+            bool result = DeleteAccount(acc);
+            return result;
+        }
         public static AccountReportsDTO AccountWithReports(int id)
         {
             var data = DataAccessFactory.AccountDataAccess().Get(id);

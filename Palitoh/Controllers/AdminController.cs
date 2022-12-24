@@ -42,6 +42,14 @@ namespace Palitoh.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
+        [Route("api/admin/users/delete/{id}")] //Permanently ban user
+        [HttpPost]
+        public HttpResponseMessage DeleteUser(int id)
+        {
+            var data = AccountService.DeleteUser(id);
+            return Request.CreateResponse(HttpStatusCode.OK, data);
+        }
+
         [Route("api/Account/delete")] //Permanently ban user
         [HttpPost]
         public HttpResponseMessage DeleteAccount(AccountDTO obj)
