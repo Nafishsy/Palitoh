@@ -94,10 +94,10 @@ namespace Palitoh.Controllers
         [HttpPost]
         public HttpResponseMessage AddAccount(AccountDTO obj) //Using for Login
         {
-            
+            var res = AccountService.AddAccount(obj);
             if (obj.Type == "Customer")
             {
-                var res = AccountService.AddAccount(obj);
+                
                 CustomerDTO cst= new CustomerDTO();
                 cst.Id=res.Id;
                 cst.Location = "empty";
@@ -107,7 +107,7 @@ namespace Palitoh.Controllers
             }
             else if(obj.Type == "Vet")
             {
-                var res = AccountService.AddAccount(obj);
+                
                 VetDTO vt = new VetDTO();
                 vt.Id = res.Id;
                 vt.Designation = "empty";
@@ -118,7 +118,7 @@ namespace Palitoh.Controllers
             }
             else if (obj.Type == "Shop")
             {
-                var res = AccountService.AddAccount(obj);
+                
                 ShopDTO sh = new ShopDTO();
                 sh.Id = res.Id;
                 sh.Location = "empty";
@@ -427,6 +427,14 @@ namespace Palitoh.Controllers
             }
         }
 
-      
+        [Route("api/Admin/Consultations/Details")] //Admin deatils dekhbe consulation er
+        [HttpGet]
+        public HttpResponseMessage ConsultationDetails()
+        {
+            var data = MapCustomerVetService.ConsultationData();
+            return Request.CreateResponse(HttpStatusCode.OK, data);
+        }
+
+
     }
 }

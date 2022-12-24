@@ -136,6 +136,40 @@ namespace BLL.Services
             return false;
         }
 
-    
+        public static string GetName(int id) //Admin Data dekhbe Consulation er
+        {
+            var acc = AccountService.GetAllAccounts();
+
+            foreach (var item in acc)
+            {
+                if(item.Id == id)
+                {
+                    return item.Name;
+                }
+            }
+            return null;
+        }
+        public static List<object> ConsultationData() //Admin Data dekhbe Consulation er
+        {
+
+            var data = GetAllMapCustomerVets();
+            var acc = AccountService.GetAllAccounts();
+
+            List<object> list = new List<object>();
+
+            foreach (var item in data)
+            {
+                var VetName = GetName(item.VetId);
+                var CusName = GetName(item.CustomerId);
+
+                list.Add(new { VetName, CusName , item.AppointmentDate});
+             
+            }
+
+            return list;
+
+        }
+
+
     }
 }
