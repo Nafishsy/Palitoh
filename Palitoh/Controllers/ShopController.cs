@@ -6,9 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Palitoh.Controllers
 {
+    [EnableCors("*", "*", "*")]
+
     public class ShopController : ApiController
     {
         //Shop Table
@@ -91,7 +94,7 @@ namespace Palitoh.Controllers
         [HttpPost]
         public HttpResponseMessage DeletePet(PetDTO obj)
         {
-            var data = PetService.DeletePet(obj);
+            var data = PetService.DeletePetFromTable(obj);
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
@@ -99,19 +102,31 @@ namespace Palitoh.Controllers
         [HttpPost]
         public HttpResponseMessage AddPet(PetDTO obj)
         {
-            if (ModelState.IsValid)
-            {
+            
                 var res = PetService.AddPet(obj);
                 if (res != null)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, new { Msg = "Added", data = res });
                 }
-                return Request.CreateResponse(HttpStatusCode.InternalServerError);
-            }
+
             return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
         }
 
         [Route("api/Pet/edit")]
+        [HttpPost]
+        public HttpResponseMessage EditPet(PetDTO obj)
+        {
+            
+                var res = PetService.EditPet(obj);
+                if (res != null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, new { Msg = "Edited", data = res });
+                }
+                return Request.CreateResponse(HttpStatusCode.InternalServerError);
+            
+            return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+        }
+        /*[Route("api/Pet/edit")]
         [HttpPost]
         public HttpResponseMessage EditPet(PetDTO obj)
         {
@@ -125,7 +140,7 @@ namespace Palitoh.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError);
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
-        }
+        }*/
 
 
 

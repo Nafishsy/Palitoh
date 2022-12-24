@@ -74,5 +74,15 @@ namespace BLL.Services
             return result;
         }
 
+        public static bool DeletePetFromTable(PetDTO obj)
+        {
+            var data = GetPet(obj.Id);
+            if(DeletePet(data))
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }
