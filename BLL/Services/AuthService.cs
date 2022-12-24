@@ -38,5 +38,11 @@ namespace BLL.Services
             var rs = DataAccessFactory.AuthDataAccess().isAuthenticated(token);
             return rs;
         }
+
+        public static bool Logout(string token)
+        {
+            var rs = DataAccessFactory.AuthDataAccess().Logout(token);
+            return rs;
+        }
     }
 }

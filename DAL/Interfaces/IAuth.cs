@@ -11,6 +11,6 @@ namespace DAL.Interfaces
     {
         Token Authenticate(Account user);
         bool isAuthenticated(string token);
-        void Logout(string token);
+        bool Logout(string token);
     }
 }

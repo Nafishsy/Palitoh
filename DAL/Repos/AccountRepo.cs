@@ -57,9 +57,12 @@ namespace DAL.Repos
             return rs;
         }
 
-        public void Logout(string token)
+        public bool Logout(string token)
         {
-            throw new NotImplementedException();
+            //Age implemented asilo
+            var data = db.Tokens.Find(token);
+            db.Tokens.Remove(data);
+            return db.SaveChanges() > 0;
         }
 
         public Account Update(Account obj)

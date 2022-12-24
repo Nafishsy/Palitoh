@@ -25,5 +25,18 @@ namespace Palitoh.Controllers
             }
             return Request.CreateResponse(HttpStatusCode.NotFound,"User not found");
         }
+
+        [Route("api/logout")]
+        [HttpPost]
+        public HttpResponseMessage Logout(AccountDTO user)
+        {
+            var token = AuthService.Authenticate(user);
+            if (token != null)
+            {
+                var acc = AccountService.GetAccount(token.AccountId);
+                return Request.CreateResponse(HttpStatusCode.OK, new { Token = token, user = acc });
+            }
+            return Request.CreateResponse(HttpStatusCode.NotFound, "User not found");
+        }
     }
 }
