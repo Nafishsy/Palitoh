@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 
 namespace BLL.Services
 {
@@ -20,6 +21,15 @@ namespace BLL.Services
             var mapper = new Mapper(config);
             var DTOAccounts = mapper.Map<List<AccountDTO>>(data);
             return DTOAccounts;
+        }
+
+        public static List<AccountDTO> SearchIntoGetAllAccounts(string search)
+        {
+            var data = (from dt in GetAllAccounts()
+                        orderby dt.Name
+                        where dt.Name.ToLower().StartsWith(search.ToLower()) ||  dt.UserName.ToLower().StartsWith(search.ToLower())
+                        select dt).ToList();
+            return data;
         }
         public static AccountDTO GetAccount(int id)
         {

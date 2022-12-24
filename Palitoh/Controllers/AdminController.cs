@@ -26,6 +26,14 @@ namespace Palitoh.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
+        [Route("api/admin/accounts/search/")] //All accounts list er upor search
+        [HttpPost]
+        public HttpResponseMessage SearchFromGetAllAccounts(AccountDTO obj)
+        {
+            var data = AccountService.SearchIntoGetAllAccounts(obj.Name);
+            return Request.CreateResponse(HttpStatusCode.OK, data);
+        }
+
         [Route("api/Account/{id}")] // Single user info show
         [HttpGet]
         public HttpResponseMessage GetAccount(int id)
@@ -76,7 +84,7 @@ namespace Palitoh.Controllers
 
         [Route("api/Account/add")] //Registration
         [HttpPost]
-        public HttpResponseMessage AddAccount(AccountDTO obj)
+        public HttpResponseMessage AddAccount(AccountDTO obj) //Using for Login
         {
             
             if (obj.Type == "Customer")
