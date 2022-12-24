@@ -64,5 +64,16 @@ namespace BLL.Services
             var result = DataAccessFactory.FoodDataAccess().Delete(EFFood);
             return result;
         }
+
+        public static List<FoodDTO> SearchFood(string name)
+        {
+            var data = GetAllFoods();
+
+            var dt= (from d in data
+                     where d.Name.ToLower().StartsWith(name.ToLower())
+                     select d).ToList();
+
+            return dt;
+        }
     }
 }

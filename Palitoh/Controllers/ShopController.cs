@@ -161,6 +161,14 @@ namespace Palitoh.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
+        [Route("api/Food/search/")]
+        [HttpPost]
+        public HttpResponseMessage SearchFood(FoodDTO obj)
+        {
+            var data = FoodService.SearchFood(obj.Name);
+            return Request.CreateResponse(HttpStatusCode.OK, data);
+        }
+
         [Route("api/Food/delete")]
         [HttpPost]
         public HttpResponseMessage DeleteFood(FoodDTO obj)
@@ -173,16 +181,14 @@ namespace Palitoh.Controllers
         [HttpPost]
         public HttpResponseMessage AddFood(FoodDTO obj)
         {
-            if (ModelState.IsValid)
-            {
+            
                 var res = FoodService.AddFood(obj);
                 if (res != null)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, new { Msg = "Added", data = res });
                 }
                 return Request.CreateResponse(HttpStatusCode.InternalServerError);
-            }
-            return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+            
         }
 
         [Route("api/Food/edit")]
