@@ -87,11 +87,11 @@ namespace Palitoh.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
-        [Route("api/palitoh/shop/cart")]
+        [Route("api/palitoh/shop/cart/{customer_id}")]
         [HttpPost]
-        public HttpResponseMessage addtocart(List<int> ids) //react er store kore rakhte hobe cart 
+        public HttpResponseMessage addtocart(List<int> ids,int customer_id) //react er store kore rakhte hobe cart //Cart e loop diya  insertion
         {
-            var data = MapCustomerFoodService.addOrder(ids);
+            var data = MapCustomerFoodService.addOrder(ids,customer_id);
             return Request.CreateResponse(HttpStatusCode.OK,data);
         }
 

@@ -437,6 +437,14 @@ namespace Palitoh.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
+        [Route("api/Admin/Shop/Details")] //Admin deatils dekhbe consulation er
+        [HttpGet]
+        public HttpResponseMessage ShopDetails()
+        {
+            var data = MapCustomerVetService.ShopData();
+            return Request.CreateResponse(HttpStatusCode.OK, data);
+        }
+
 
     }
 }

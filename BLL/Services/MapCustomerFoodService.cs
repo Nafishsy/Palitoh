@@ -66,15 +66,16 @@ namespace BLL.Services
             return result;
         }
 
-        public static bool addOrder(List<int> ids)
+        public static bool addOrder(List<int> ids,int C_id)
         {
             bool result = true;
+            MapCustomerFoodDTO LastOrder = MapCustomerFoodService.GetAllMapCustomerFoods().LastOrDefault((e)=> e.OrderId>0);
             foreach (var id in ids)
             {
                 MapCustomerFoodDTO order = new MapCustomerFoodDTO();
-                order.OrderId = 2;
+                order.OrderId = LastOrder.OrderId+1;
                 order.EmployeeId = null;
-                order.CustomerId = 1;
+                order.CustomerId = C_id;
                 order.FoodId = id;
                 order.RequestItemTime = System.DateTime.Now.AddDays(2);
 

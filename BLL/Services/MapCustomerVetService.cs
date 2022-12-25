@@ -149,6 +149,20 @@ namespace BLL.Services
             }
             return null;
         }
+
+        public static string GetFoodName(int id) //Admin Data dekhbe Consulation er
+        {
+            var acc = FoodService.GetAllFoods();
+
+            foreach (var item in acc)
+            {
+                if (item.Id == id)
+                {
+                    return item.Name;
+                }
+            }
+            return null;
+        }
         public static List<object> ConsultationData() //Admin Data dekhbe Consulation er
         {
 
@@ -164,6 +178,27 @@ namespace BLL.Services
 
                 list.Add(new { VetName, CusName , item.AppointmentDate});
              
+            }
+
+            return list;
+
+        }
+
+        public static List<object> ShopData() //Admin Data dekhbe Shop er
+        {
+
+            var data = MapCustomerFoodService.GetAllMapCustomerFoods();
+            var acc = AccountService.GetAllAccounts();
+
+            List<object> list = new List<object>();
+
+            foreach (var item in data)
+            {
+                var FoodName = GetFoodName(item.FoodId);
+                var CusName = GetName(item.CustomerId);
+
+                list.Add(new { FoodName, CusName, item.RequestItemTime });
+
             }
 
             return list;
