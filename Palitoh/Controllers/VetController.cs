@@ -26,7 +26,7 @@ namespace Palitoh.Controllers
 
         [Route("api/vet/appointments/search/date")]
         [HttpPost]
-        public HttpResponseMessage SearchPaitent(SearchFormDTO obj) //can see his schedule
+        public HttpResponseMessage SearchPaitent(SearchFormDTO obj) //can see his schedule from time to time
         {
             var data = MapCustomerVetService.SearchVetsPatientByDTD(obj);
             return Request.CreateResponse(HttpStatusCode.OK, data);

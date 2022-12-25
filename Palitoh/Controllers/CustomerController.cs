@@ -173,5 +173,14 @@ namespace Palitoh.Controllers
             var data = MapCustomerVetService.GetAppointmentsOfCus(id);
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
+
+        [Route("api/palitoh/shop/history/{id}")]
+        [HttpGet]
+
+        public HttpResponseMessage OldOrder(int id) //can see his schedule
+        {
+            var data = MapCustomerFoodService.GetAllCartCustomer(id);
+            return Request.CreateResponse(HttpStatusCode.OK, data);
+        }
     }
 }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Xml.Linq;
 
 namespace BLL.Services
 {
@@ -86,5 +87,16 @@ namespace BLL.Services
             }
             return result;
         }
+        public static object GetAllCartCustomer(int id)
+        {
+            var data = GetAllMapCustomerFoods();
+            var history = (from dt in data
+                           join ac in FoodService.GetAllFoods() on dt.FoodId equals ac.Id
+                           orderby dt.OrderId
+                           where dt.CustomerId == id
+                           select new { FoodName = ac.Name, Date = dt.RequestItemTime, Id = dt.OrderId }).ToList();
+            return history;
+        }
+      
     }
 }

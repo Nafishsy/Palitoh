@@ -60,6 +60,10 @@ namespace BLL.Services
 
         public static object SearchVetsPatientByDTD(SearchFormDTO srch) //Specific Vet's Appoinments er upor User name diya Date time to Date time
         {
+            if(srch.EndDate == null)
+            {
+                srch.EndDate = DateTime.Now;
+            }
             var data = (from dt in GetAllMapCustomerVets()
                         join ac in AccountService.GetAllAccounts() on dt.CustomerId equals ac.Id
                         orderby ac.Name
