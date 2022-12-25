@@ -1,5 +1,6 @@
 ﻿using BLL.DTOs;
 using BLL.Services;
+using Palitoh.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,8 @@ using static System.Net.Mime.MediaTypeNames;
 namespace Palitoh.Controllers
 {
     [EnableCors("*", "*", "*")]
-    
+    [CustomAuth]
+
     public class CustomerController : ApiController
     {
         public System.Web.SessionState.HttpSessionState Session { get; set; }

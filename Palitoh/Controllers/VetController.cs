@@ -13,6 +13,7 @@ namespace Palitoh.Controllers
 {
     [EnableCors("*", "*", "*")]
     [CustomAuth]
+
     public class VetController : ApiController
     {
         [Route("api/vet/appointments/{id}")]

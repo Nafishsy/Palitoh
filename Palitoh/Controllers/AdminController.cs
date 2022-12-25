@@ -14,6 +14,8 @@ namespace Palitoh.Controllers
 {
 
     [EnableCors("*", "*", "*")]
+    [CustomAuth]
+
     public class AdminController : ApiController
     {
         //[CustomAuth]

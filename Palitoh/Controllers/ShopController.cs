@@ -1,5 +1,6 @@
 ﻿using BLL.DTOs;
 using BLL.Services;
+using Palitoh.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ using System.Web.Http.Cors;
 namespace Palitoh.Controllers
 {
     [EnableCors("*", "*", "*")]
+    [CustomAuth]
 
     public class ShopController : ApiController
     {
