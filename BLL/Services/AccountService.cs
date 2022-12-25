@@ -145,5 +145,18 @@ namespace BLL.Services
             }
             return false;
         }
+
+
+        public static List<int> AccountsPerType()
+        {
+            List<int> dt = new List<int>();
+            var data = GetAllAccounts();
+            int customerCnt = data.Count(d => d.Type == "Customer");
+            int vetCnt = data.Count(d => d.Type == "Vet");
+            dt.Add(customerCnt);
+            dt.Add(vetCnt);
+            return dt;
+
+        }
     }
 }

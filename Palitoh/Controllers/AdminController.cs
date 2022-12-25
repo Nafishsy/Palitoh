@@ -28,6 +28,14 @@ namespace Palitoh.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
+        [Route("api/Accounts/user/Count")] //All accounts for graph
+        [HttpGet]
+        public HttpResponseMessage AccountsPerType()
+        {
+            var data = AccountService.AccountsPerType();
+            return Request.CreateResponse(HttpStatusCode.OK, data);
+        }
+
         [Route("api/admin/accounts/search/")] //All accounts list er upor search
         [HttpPost]
         public HttpResponseMessage SearchFromGetAllAccounts(AccountDTO obj)
