@@ -27,7 +27,7 @@ namespace Palitoh.Controllers
         [HttpPost]
         public HttpResponseMessage SendText(ConversationDTO ct ) //can see his schedule
         {
-            //var data = ConversationService.AddConversation(ct);
+            var data = ConversationService.AddConversation(ct);
             return Request.CreateResponse(HttpStatusCode.OK, ct);
         }
     }
