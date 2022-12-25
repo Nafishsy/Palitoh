@@ -34,7 +34,8 @@ namespace Palitoh.Controllers
         [HttpPost]
         public HttpResponseMessage Logout(AccountDTO user)
         {
-            var token = AuthService.Authenticate(user);
+            var account = AccountService.GetAccount(user.Id);
+            var token = AuthService.Authenticate(account);
             if(AuthService.Logout(token.AccessToken))
             {
                 return Request.CreateResponse(HttpStatusCode.OK);

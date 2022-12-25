@@ -60,7 +60,7 @@ namespace DAL.Repos
         public bool Logout(string token)
         {
             //Age implemented asilo
-            var data = db.Tokens.Find(token);
+            var data = db.Tokens.FirstOrDefault(e => e.AccessToken.Equals(token));
             db.Tokens.Remove(data);
             return db.SaveChanges() > 0;
         }
