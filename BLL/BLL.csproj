@@ -48,6 +48,8 @@
     <Compile Include="DTOs\AccountReportsDTO.cs" />
     <Compile Include="DTOs\AccountTokensDTO.cs" />
     <Compile Include="DTOs\AdminDTO.cs" />
+    <Compile Include="DTOs\AppoinmentsConversationDTO.cs" />
+    <Compile Include="DTOs\ConversationDTO.cs" />
     <Compile Include="DTOs\CustomerDTO.cs" />
     <Compile Include="DTOs\CustomersFoodDTO.cs" />
     <Compile Include="DTOs\CustomersPetDTO.cs" />
@@ -75,6 +77,7 @@
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\AdminService.cs" />
     <Compile Include="Services\AuthService.cs" />
+    <Compile Include="Services\ConversationService.cs" />
     <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Services\EmployeeService.cs" />
     <Compile Include="Services\FoodService.cs" />

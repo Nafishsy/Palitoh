@@ -23,5 +23,7 @@ namespace DAL.EF
         public DbSet<Shop> Shops { get; set; }
         public DbSet<Token> Tokens { get; set; }
         public DbSet<Vet> Vets { get; set; }
+        public DbSet<Conversation> Conversations { get; set; }
+
     }
 }

@@ -29,5 +29,12 @@ namespace DAL.EF.Models
         [ForeignKey("Vet")]
         public int VetId { get; set; }
         public virtual Vet Vet { get; set; }
+
+
+        public virtual List<Conversation> Conversation { get; set; }
+        public MapCustomerVet()
+        {
+            Conversation = new List<Conversation>();
+        }
     }
 }

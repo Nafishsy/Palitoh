@@ -15,6 +15,10 @@ namespace DAL
         {
             return new MapCustomerVetRepo();
         }
+        public static IRepo<Conversation, int, Conversation> ConversationDataAccess()
+        {
+            return new ConversationRepo();
+        }
         public static IRepo<MapCustomerFood, int, MapCustomerFood> MapCustomerFoodDataAccess()
         {
             return new MapCustomerFoodRepo();

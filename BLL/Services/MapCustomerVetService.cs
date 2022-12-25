@@ -38,6 +38,15 @@ namespace BLL.Services
                         select new { ac.Name, dt.AppointmentDate, ac.Id }).ToList();
             return data;
         }
+        public static object GetAppointmentsOfCus(int id) //Specific Vet's Appoinments
+        {
+            var data = (from dt in GetAllMapCustomerVets()
+                        join ac in AccountService.GetAllAccounts() on dt.VetId equals ac.Id
+                        orderby ac.Name
+                        where dt.CustomerId == id
+                        select new { ac.Name, dt.AppointmentDate, dt.Id }).ToList();
+            return data;
+        }
 
         public static object SearchVetsPatient(string name,int id) //Specific Vet's Appoinments er upor User name diya Search
         {

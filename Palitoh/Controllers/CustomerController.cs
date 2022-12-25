@@ -18,7 +18,6 @@ namespace Palitoh.Controllers
 {
     [EnableCors("*", "*", "*")]
     [CustomAuth]
-
     public class CustomerController : ApiController
     {
         public System.Web.SessionState.HttpSessionState Session { get; set; }
@@ -163,6 +162,16 @@ namespace Palitoh.Controllers
             var data = VetService.AddVet(ct);
             return Request.CreateResponse(HttpStatusCode.OK, data);
 
+        }
+
+        [Route("api/customer/{id}/Appoinments")]
+        [HttpGet]
+        [CustomAuth]
+
+        public HttpResponseMessage Appoinments(int id) //can see his schedule
+        {
+            var data = MapCustomerVetService.GetAppointmentsOfCus(id);
+            return Request.CreateResponse(HttpStatusCode.OK, data);
         }
     }
 }
