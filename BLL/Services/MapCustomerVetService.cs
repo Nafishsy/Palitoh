@@ -32,10 +32,10 @@ namespace BLL.Services
         public static object GetAppointmentsOfVet(int id) //Specific Vet's Appoinments
         {
             var data = (from dt in GetAllMapCustomerVets()
-                        join ac in AccountService.GetAllAccounts() on dt.VetId equals ac.Id
+                        join ac in AccountService.GetAllAccounts() on dt.CustomerId equals ac.Id
                         orderby ac.Name
                         where dt.VetId == id
-                        select new { ac.Name, dt.AppointmentDate, ac.Id }).ToList();
+                        select new { ac.Name, dt.AppointmentDate, Customer_id = ac.Id, dt.Id }).ToList();
             return data;
         }
         public static object GetAppointmentsOfCus(int id) //Specific Vet's Appoinments
@@ -44,27 +44,27 @@ namespace BLL.Services
                         join ac in AccountService.GetAllAccounts() on dt.VetId equals ac.Id
                         orderby ac.Name
                         where dt.CustomerId == id
-                        select new { ac.Name, dt.AppointmentDate, dt.Id }).ToList();
+                        select new { ac.Name, dt.AppointmentDate, dt.Id ,VetId = ac.Id}).ToList();
             return data;
         }
 
         public static object SearchVetsPatient(string name,int id) //Specific Vet's Appoinments er upor User name diya Search
         {
             var data = (from dt in GetAllMapCustomerVets()
-                        join ac in AccountService.GetAllAccounts() on dt.VetId equals ac.Id
+                        join ac in AccountService.GetAllAccounts() on dt.CustomerId equals ac.Id
                         orderby ac.Name
                         where dt.VetId == id && ac.Name.ToLower().StartsWith(name.ToLower())
-                        select new { ac.Name, dt.AppointmentDate, ac.Id }).ToList();
+                        select new { ac.Name, dt.AppointmentDate, Customer_id = ac.Id, dt.Id }).ToList();
             return data;
         }
 
         public static object SearchVetsPatientByDTD(SearchFormDTO srch) //Specific Vet's Appoinments er upor User name diya Date time to Date time
         {
             var data = (from dt in GetAllMapCustomerVets()
-                        join ac in AccountService.GetAllAccounts() on dt.VetId equals ac.Id
+                        join ac in AccountService.GetAllAccounts() on dt.CustomerId equals ac.Id
                         orderby ac.Name
                         where dt.VetId == srch.Id && dt.AppointmentDate.Date >= srch.StartDate && (dt.AppointmentDate.Date <= srch.EndDate || srch.EndDate==null)
-                        select new { ac.Name, dt.AppointmentDate, ac.Id }).ToList();
+                        select new { ac.Name, dt.AppointmentDate, Customer_id =ac.Id ,dt.Id}).ToList();
             return data;
         }
         public static object GetAppointmentsHistoryUser(DateTime date,int id) //Secific Date's er ager appointments for USER
