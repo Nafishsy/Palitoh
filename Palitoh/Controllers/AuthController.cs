@@ -1,5 +1,6 @@
 ﻿using BLL.DTOs;
 using BLL.Services;
+using Palitoh.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,12 @@ using System.Web.Http.Cors;
 namespace Palitoh.Controllers
 {
     [EnableCors("*","*","*")]
+    [AllowAnonymous]
     public class AuthController : ApiController
     {
         [Route("api/login")]
+        [AllowAnonymous]
+
         [HttpPost]
         public HttpResponseMessage Login(AccountDTO user)
         {
@@ -31,12 +35,12 @@ namespace Palitoh.Controllers
         public HttpResponseMessage Logout(AccountDTO user)
         {
             var token = AuthService.Authenticate(user);
-            if (token != null)
+            if(AuthService.Logout(token.AccessToken))
             {
-                var acc = AccountService.GetAccount(token.AccountId);
-                return Request.CreateResponse(HttpStatusCode.OK, new { Token = token, user = acc });
+                return Request.CreateResponse(HttpStatusCode.OK);
             }
-            return Request.CreateResponse(HttpStatusCode.NotFound, "User not found");
+            return Request.CreateResponse(HttpStatusCode.NotFound, "NO token");
+
         }
     }
 }
