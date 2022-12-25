@@ -71,10 +71,19 @@ namespace BLL.Services
         {
             bool result = true;
             MapCustomerFoodDTO LastOrder = MapCustomerFoodService.GetAllMapCustomerFoods().LastOrDefault((e)=> e.OrderId>0);
+            int OrderID;
+            if(LastOrder==null)
+            {
+                OrderID = 0;
+            }
+            else
+            {
+                OrderID = LastOrder.OrderId;
+            }
             foreach (var id in ids)
             {
                 MapCustomerFoodDTO order = new MapCustomerFoodDTO();
-                order.OrderId = LastOrder.OrderId+1;
+                order.OrderId = OrderID + 1;
                 order.EmployeeId = null;
                 order.CustomerId = C_id;
                 order.FoodId = id;

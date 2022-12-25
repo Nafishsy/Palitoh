@@ -23,6 +23,15 @@ namespace BLL.Services
             return DTOAccounts;
         }
 
+        public static List<AccountDTO> GetAllAccountsAdmin()
+        {
+            var data = GetAllAccounts();
+            var dt = (from d in data
+                      where d.Type != "Admin"
+                      select d).ToList();
+            return dt;
+        }
+
         public static List<AccountDTO> SearchIntoGetAllAccounts(string search)
         {
             var data = (from dt in GetAllAccounts()

@@ -22,9 +22,9 @@ namespace Palitoh.Controllers
         //Account Table
         [Route("api/Accounts")] //All accounts list show
         [HttpGet]
-        public HttpResponseMessage GetAllAccounts() 
+        public HttpResponseMessage GetAllAccounts()
         {
-            var data = AccountService.GetAllAccounts();
+            var data = AccountService.GetAllAccountsAdmin();
             return Request.CreateResponse(HttpStatusCode.OK, data);
         }
 
@@ -100,48 +100,7 @@ namespace Palitoh.Controllers
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
         }
-
-        [Route("api/Account/add")] //Registration
-        [HttpPost]
-        public HttpResponseMessage AddAccount(AccountDTO obj) //Using for Login
-        {
-            var res = AccountService.AddAccount(obj);
-            if (obj.Type == "Customer")
-            {
-                
-                CustomerDTO cst= new CustomerDTO();
-                cst.Id=res.Id;
-                cst.Location = "empty";
-                cst.Balance = 5000;
-                var customer = CustomerService.AddCustomer(cst);
-                return Request.CreateResponse(HttpStatusCode.OK, customer);
-            }
-            else if(obj.Type == "Vet")
-            {
-                
-                VetDTO vt = new VetDTO();
-                vt.Id = res.Id;
-                vt.Designation = "empty";
-                vt.AppointmentFees = 1000;
-                vt.Location = "empty";
-                var vet = VetService.AddVet(vt);
-                return Request.CreateResponse(HttpStatusCode.OK, vet);
-            }
-            else if (obj.Type == "Shop")
-            {
-                
-                ShopDTO sh = new ShopDTO();
-                sh.Id = res.Id;
-                sh.Location = "empty";
-
-                var shop = ShopService.AddShop(sh);
-                return Request.CreateResponse(HttpStatusCode.OK, shop);
-            }
-            
-            return Request.CreateResponse(HttpStatusCode.BadRequest, new { Msg = ModelState.Values.SelectMany(v => v.Errors)});      
-
-            
-        }
+        
 
         [Route("api/Account/edit")] //Edit user info
         [HttpPost]
